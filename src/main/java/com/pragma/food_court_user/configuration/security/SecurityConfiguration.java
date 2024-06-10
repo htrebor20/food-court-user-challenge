@@ -21,9 +21,8 @@ public class SecurityConfiguration {
     @Bean
     public RequestMatcher whiteListRequestMatcher(){
         List<String> whiteList = List.of(
-                "/user/"
+                "/user/**"
         );
-
         return request -> whiteList.stream().anyMatch(request.getServletPath()::equals);
     }
 
@@ -33,8 +32,7 @@ public class SecurityConfiguration {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(whiteListRequestMatcher()).permitAll()
-                        .requestMatchers("/user/").hasRole("ADMIN")
-                        .anyRequest().authenticated())
+                        .anyRequest().permitAll())
                 .sessionManagement(sessionManager -> sessionManager
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .build();

@@ -29,6 +29,11 @@ public class UserUseCase implements IUserServicePort {
         return saveUser(user, RoleEnum.OWNER.getRoleName());
     }
 
+    @Override
+    public User findById(Long id) {
+        return userPersistencePort.findById(id);
+    }
+
     private User saveUser(User user, String roleName) {
         Role role = roleServicePort.findByName(roleName);
         user.setRole(role);

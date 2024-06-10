@@ -1,5 +1,6 @@
 package com.pragma.food_court_user.adapters.driving.http.dto.response;
 
+import com.pragma.food_court_user.domain.model.Role;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -8,7 +9,6 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class UserResponseDto {
     private Long id;
     private String name;
@@ -17,5 +17,5 @@ public class UserResponseDto {
     private Long cellphone;
     private String email;
     private LocalDate birthdate;
-    private String role;
+    private Role role;
 }
