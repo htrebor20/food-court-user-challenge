@@ -1,5 +1,6 @@
 package com.pragma.food_court_user.adapters.driving.http.controller;
 
+import com.pragma.food_court_user.adapters.driving.http.dto.request.UserOwnerRequestDto;
 import com.pragma.food_court_user.adapters.driving.http.dto.request.UserRequestDto;
 import com.pragma.food_court_user.adapters.driving.http.dto.response.UserResponseDto;
 import com.pragma.food_court_user.adapters.driving.http.mapper.IUserRequestMapper;
@@ -19,9 +20,17 @@ public class UserRestController {
     private final IUserServicePort userServicePort;
 
     @PostMapping("/owner")
-    public ResponseEntity<UserResponseDto> createUserOwner(@RequestBody @Valid UserRequestDto request) {
+    public ResponseEntity<UserResponseDto> createUserOwner(@RequestBody @Valid UserOwnerRequestDto request) {
         User user = userRequestMapper.toModel(request);
         User savedUser = userServicePort.saveUserOwner(user);
+        UserResponseDto response = userRequestMapper.toResponseDTO(savedUser);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/employee")
+    public ResponseEntity<UserResponseDto> createUserEmployee(@RequestBody @Valid UserRequestDto request) {
+        User user = userRequestMapper.toModel(request);
+        User savedUser = userServicePort.saveUserEmployee(user);
         UserResponseDto response = userRequestMapper.toResponseDTO(savedUser);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
