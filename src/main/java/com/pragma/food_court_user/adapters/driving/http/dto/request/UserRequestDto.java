@@ -27,7 +27,4 @@ public class UserRequestDto {
 
     @NotBlank(message = "Password is mandatory")
     private String password;
-
-    @NotNull(message = "Birthdate is mandatory")
-    private LocalDate birthdate;
 }
