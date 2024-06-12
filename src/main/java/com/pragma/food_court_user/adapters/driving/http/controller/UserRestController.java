@@ -18,7 +18,7 @@ public class UserRestController {
     private final IUserRequestMapper userRequestMapper;
     private final IUserServicePort userServicePort;
 
-    @PostMapping("/")
+    @PostMapping("/owner")
     public ResponseEntity<UserResponseDto> createUserOwner(@RequestBody @Valid UserRequestDto request) {
         User user = userRequestMapper.toModel(request);
         User savedUser = userServicePort.saveUserOwner(user);
@@ -31,6 +31,5 @@ public class UserRestController {
         User user = userServicePort.findById(id);
         UserResponseDto response = userRequestMapper.toResponseDTO(user);
         return ResponseEntity.ok(response);
-
     }
 }
