@@ -31,7 +31,8 @@ public class SecurityConfiguration {
     @Bean
     public RequestMatcher whiteListRequestMatcher() {
         List<String> whiteList = List.of(
-                "/auth/login"
+                "/auth/login",
+                "/user/customer"
         );
         return request -> whiteList.stream().anyMatch(request.getServletPath()::equals);
     }
@@ -45,7 +46,6 @@ public class SecurityConfiguration {
                         .requestMatchers("/user/employee").hasRole("OWNER")
                         .requestMatchers("/user/owner").hasRole("ADMIN")
                         .requestMatchers("/user/**").hasRole("ADMIN")
-
                         .anyRequest().authenticated())
                 .sessionManagement(sessionManager -> sessionManager
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
