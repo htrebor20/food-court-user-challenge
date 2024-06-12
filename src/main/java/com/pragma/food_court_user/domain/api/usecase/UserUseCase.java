@@ -36,6 +36,12 @@ public class UserUseCase implements IUserServicePort {
     }
 
     @Override
+    public User saveUserCustomer(User user) {
+        validateUser(user);
+        return saveUser(user, RoleEnum.CUSTOMER.getRoleName());
+    }
+
+    @Override
     public User findById(Long id) {
         return userPersistencePort.findById(id);
     }

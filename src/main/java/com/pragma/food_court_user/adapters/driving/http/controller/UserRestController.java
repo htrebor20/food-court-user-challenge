@@ -35,6 +35,15 @@ public class UserRestController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    @PostMapping("/customer")
+    public ResponseEntity<UserResponseDto> createUserCustomer(@RequestBody @Valid UserRequestDto request) {
+        User user = userRequestMapper.toModel(request);
+        User savedUser = userServicePort.saveUserCustomer(user);
+        UserResponseDto response = userRequestMapper.toResponseDTO(savedUser);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDto> findUserById(@PathVariable Long id) {
         User user = userServicePort.findById(id);
