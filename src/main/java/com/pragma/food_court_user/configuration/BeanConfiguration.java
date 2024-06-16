@@ -7,6 +7,7 @@ import com.pragma.food_court_user.adapters.driven.jpa.mysql.mapper.IUserEntityMa
 import com.pragma.food_court_user.adapters.driven.jpa.mysql.repositoty.IRoleRepository;
 import com.pragma.food_court_user.adapters.driven.jpa.mysql.repositoty.IUserRepository;
 import com.pragma.food_court_user.adapters.driven.security.adapter.AuthenticationAdapter;
+import com.pragma.food_court_user.configuration.client.IUserClient;
 import com.pragma.food_court_user.configuration.security.jwt.JwtTokenUtil;
 import com.pragma.food_court_user.domain.api.IAuthenticationServicePort;
 import com.pragma.food_court_user.domain.api.IUserServicePort;
@@ -36,10 +37,11 @@ public class BeanConfiguration {
     private final JwtTokenUtil jwtTokenUtil;
     private final UserDetailsService userDetailsService;
     private final AuthenticationManager authenticationManager;
+    private final IUserClient userClient;
 
     @Bean
     public IUserPersistencePort userPersistencePort() {
-        return new UserAdapter(userRepository, userEntityMapper, passwordEncoder);
+        return new UserAdapter(userRepository, userEntityMapper, passwordEncoder,userClient);
     }
 
     @Bean

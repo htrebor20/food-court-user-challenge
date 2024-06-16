@@ -43,8 +43,8 @@ public class SecurityConfiguration {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(whiteListRequestMatcher()).permitAll()
-                        .requestMatchers("/user/employee").hasRole("OWNER")
                         .requestMatchers("/user/owner").hasRole("ADMIN")
+                        .requestMatchers("/user/employee").hasRole("OWNER")
                         .requestMatchers("/user/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .sessionManagement(sessionManager -> sessionManager
