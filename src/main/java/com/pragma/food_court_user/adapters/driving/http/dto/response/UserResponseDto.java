@@ -17,5 +17,6 @@ public class UserResponseDto {
     private Long cellphone;
     private String email;
     private LocalDate birthdate;
+    private Long idRestaurant;
     private Role role;
 }

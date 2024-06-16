@@ -1,5 +1,7 @@
 package com.pragma.food_court_user.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDate;
 
 public class User {
@@ -10,10 +12,12 @@ public class User {
     private final Long cellphone;
     private final String email;
     private String password;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private final LocalDate birthdate;
+    private Long idRestaurant;
     private Role role;
 
-    public User(Long id, String name, String lastName, Long document, Long cellphone, String email, String password, LocalDate birthdate, Role role) {
+    public User(Long id, String name, String lastName, Long document, Long cellphone, String email, String password, LocalDate birthdate, Long idRestaurant, Role role) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -22,6 +26,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.birthdate = birthdate;
+        this.idRestaurant = idRestaurant;
         this.role = role;
     }
 
@@ -59,6 +64,14 @@ public class User {
 
     public LocalDate getBirthdate() {
         return birthdate;
+    }
+
+    public Long getIdRestaurant() {
+        return idRestaurant;
+    }
+
+    public void setIdRestaurant(Long idRestaurant) {
+        idRestaurant = idRestaurant;
     }
 
     public Role getRole() {

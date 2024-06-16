@@ -37,6 +37,22 @@ public class JwtTokenUtil implements Serializable {
                 .compact();
     }
 
+    public String generateTokenFeign() {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("roles", List.of("ADMIN"));
+        return doGenerateTokenFeign(claims);
+    }
+
+    private String doGenerateTokenFeign(Map<String, Object> claims) {
+        return Jwts.builder()
+                .setClaims(claims)
+                .setSubject("msvc-food-court-user")
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis()+ JWT_TOKEN_VALIDITY))
+                .signWith(getKey())
+                .compact();
+    }
+
     private Key getKey() {
         byte[] keyBytes = secret.getBytes();
         return Keys.hmacShaKeyFor(keyBytes);

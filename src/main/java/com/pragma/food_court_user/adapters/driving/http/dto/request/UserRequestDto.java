@@ -27,4 +27,8 @@ public class UserRequestDto {
 
     @NotBlank(message = "Password is mandatory")
     private String password;
+
+    private LocalDate birthdate;
+
+    private Long idRestaurant;
 }
